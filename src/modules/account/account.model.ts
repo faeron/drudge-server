@@ -27,6 +27,7 @@ interface AccountInterface extends Document {
   password: string;
   createdAt: Date;
   updatedAt: Date;
+  lastLoginAt: Date;
   verifyPassword(password: string): Promise<boolean>;
 }
 
@@ -37,6 +38,7 @@ const AccountSchema = new mongoose.Schema(
       required: true,
     },
     password: { type: String, required: true },
+    lastLoginAt: { type: Date },
   },
   { timestamps: true }
 );
