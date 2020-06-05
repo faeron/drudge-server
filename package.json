@@ -1,0 +1,43 @@
+{
+  "name": "drudge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=development nodemon --watch 'src/**/*' -e ts,graphql --exec 'ts-node' src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": ""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@graphql-tools/load": "^6.0.3",
+    "@graphql-tools/load-files": "^6.0.3",
+    "@graphql-tools/merge": "^6.0.3",
+    "@graphql-tools/schema": "^6.0.3",
+    "@types/koa-graphql": "^0.8.3",
+    "dotenv": "^8.2.0",
+    "graphql": "^15.0.0",
+    "graphql-playground-middleware-koa": "^1.6.14",
+    "graphql-tools": "^5.0.0-rc.4",
+    "inversify": "^5.0.1",
+    "koa": "^2.12.0",
+    "koa-graphql": "^0.8.0",
+    "koa-router": "^8.0.8",
+    "mongoose": "^5.9.15",
+    "pino": "^6.3.1",
+    "reflect-metadata": "^0.1.13"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.11.3",
+    "@types/koa-router": "^7.4.1",
+    "@types/mongoose": "^5.7.21",
+    "@types/pino": "^6.0.1",
+    "cross-env": "^7.0.2",
+    "nodemon": "^2.0.4",
+    "pino-pretty": "^4.0.0",
+    "prettier": "^2.0.5",
+    "ts-node": "^8.10.1",
+    "typescript": "^3.9.3"
+  }
+}

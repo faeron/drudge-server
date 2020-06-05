@@ -1,0 +1,19 @@
+type Account implements Node {
+  id: ID!
+  email: String
+  createdAt: Date
+  updatedAt: Date
+}
+
+input CreateAccountInput {
+  email: String
+  password: String
+}
+
+type Query {
+  node(id: ID!): Node
+}
+
+type Mutation {
+  signup(account: CreateAccountInput): Account!
+}
