@@ -1,8 +1,8 @@
 type Account implements Node {
   id: ID!
   email: String
-  createdAt: Date
-  updatedAt: Date
+  createdAt: DateTime
+  updatedAt: DateTime
 }
 
 input CreateAccountInput {
