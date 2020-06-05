@@ -5,8 +5,9 @@ export const resolvers = {
     id: globalIdField("Account"),
   },
   Mutation: {
-    signup: async (parent, args, context) => {
-      return context.account.signup(args.account);
+    signup: async (root, { input }, context) => {
+      const createdAccount = await context.account.signup(input);
+      return { account: createdAccount };
     },
   },
 };

@@ -10,11 +10,16 @@ input CreateAccountInput {
   email: String
   password: String
 }
+type CreateAccountPayload {
+  account: Account!
+  token: String
+}
+
 
 type Query {
   node(id: ID!): Node
 }
 
 type Mutation {
-  signup(account: CreateAccountInput): Account!
+  signup(input: CreateAccountInput): CreateAccountPayload!
 }
