@@ -15,6 +15,7 @@
     "@graphql-tools/load-files": "^6.0.3",
     "@graphql-tools/merge": "^6.0.3",
     "@graphql-tools/schema": "^6.0.3",
+    "@nexus/schema": "^0.14.0",
     "@types/koa-graphql": "^0.8.3",
     "dotenv": "^8.2.0",
     "graphql": "^15.0.0",

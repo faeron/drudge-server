@@ -1,17 +1,17 @@
 import Router from "koa-router";
-import { makeExecutableSchema } from "@graphql-tools/schema";
-import { loadFilesSync } from "@graphql-tools/load-files";
-import { mergeResolvers, mergeTypeDefs } from "@graphql-tools/merge";
 import koaPlayground from "graphql-playground-middleware-koa";
 const graphqlHTTP = require("koa-graphql");
+import { makeSchema } from "@nexus/schema";
+
 import { AccountService } from "../modules/account/account.service";
+import * as Account from "../modules/account/account.schema";
+import * as scalars from "../modules/common/scalars.schema";
+import * as node from "../modules/common/node.schema";
 
 const router = new Router();
 
 export default async ({ app, log }) => {
-  const typeDefs = mergeTypeDefs(loadFilesSync("./**.graphql"));
-  const resolvers = mergeResolvers(loadFilesSync("./**/*.resolvers.ts"));
-  const schema = makeExecutableSchema({ typeDefs, resolvers });
+  const schema = makeSchema({ types: [scalars, node, Account] });
 
   const endpoint = "/graphql";
 
