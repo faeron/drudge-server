@@ -24,7 +24,7 @@ export default async ({ app, log }) => {
   );
 
   //route for graphql playground
-  router.all("/playground", koaPlayground({ endpoint }));
+  router.all("/playground", koaPlayground({ endpoint }) as any);
 
   app.use(router.routes());
 };
