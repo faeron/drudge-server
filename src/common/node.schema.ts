@@ -33,15 +33,22 @@ const modelsByTypename = {
 
 export const node = queryField("node", {
   type: Node,
+  nullable: true,
   args: {
     id: idArg({ required: true }),
   },
   async resolve(_, { id: globalId }, context) {
     const { __typename, id } = fromGlobalId(globalId);
+    if (!__typename || !id) {
+      return null;
+    }
     // determine which model/datasource can fetch the node by type
     const dataSource = modelsByTypename[__typename];
-    const node = await context[dataSource].getNode(id);
+    const node = await context[dataSource].getById(id);
+    if (!node) {
+      return null;
+    }
     //
-    return { ...node.toObject(), __typename };
+    return { ...node, __typename };
   },
 });
