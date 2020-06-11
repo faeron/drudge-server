@@ -1,4 +1,4 @@
-import Router from "koa-router";
+import Router from "@koa/router";
 import koaPlayground from "graphql-playground-middleware-koa";
 const graphqlHTTP = require("koa-graphql");
 import { makeSchema } from "@nexus/schema";
