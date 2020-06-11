@@ -18,8 +18,11 @@ export class AccountService {
     return existingAccount.toObject();
   }
 
-  public async getNode(id) {
+  public async getById(id) {
     const account = await Account.findById(id);
-    return await account.toObject();
+    if (!account) {
+      return null;
+    }
+    return account.toObject();
   }
 }
