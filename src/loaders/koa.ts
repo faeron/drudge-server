@@ -2,7 +2,7 @@ import cors from "@koa/cors";
 import bodyParser from "koa-bodyparser";
 import passport from "koa-passport";
 import { Strategy as LocalStrategy } from "passport-local";
-import Router from "koa-router";
+import Router from "@koa/router";
 import { AccountService } from "../account/account.service";
 
 export default async ({ app, log }) => {
