@@ -4,27 +4,31 @@ const graphqlHTTP = require("koa-graphql");
 import { makeSchema } from "@nexus/schema";
 
 import { AccountService } from "../account/account.service";
-import * as Account from "../account/account.schema";
-import * as scalars from "../common/scalars.schema";
-import * as node from "../common/node.schema";
+import { graphqlTypes as commonTypes } from "../common";
+import { graphqlTypes as accountTypes } from "../account";
 
 const router = new Router();
 
 export default async ({ app, log }) => {
-  const schema = makeSchema({ types: [scalars, node, Account] });
+  // create graphql schema from all collected types
+  const schema = makeSchema({ types: [commonTypes, accountTypes] });
 
-  const endpoint = "/graphql";
+  // graphql endpoint URI
+  const endpointURI = "/graphql";
 
-  // route for graphql api endpoint
+  // create the graphql context per request
+  const createContext = () => ({ account: new AccountService() });
+
+  // add route for graphql api endpoint
   router.all(
-    endpoint,
+    endpointURI,
     graphqlHTTP(() => {
-      return { schema, context: { account: new AccountService() } };
+      return { schema, context: createContext() };
     })
   );
 
-  //route for graphql playground
-  router.all("/playground", koaPlayground({ endpoint }) as any);
+  // add route for graphql playground
+  router.all("/playground", koaPlayground({ endpoint: endpointURI }) as any);
 
   app.use(router.routes());
 };
