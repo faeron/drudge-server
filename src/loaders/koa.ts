@@ -4,6 +4,7 @@ import passport from "koa-passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import Router from "@koa/router";
 import { AccountService } from "../account/account.service";
+import { routes as accountRoutes } from "../account";
 
 export default async ({ app, log }) => {
   const accounts = new AccountService();
@@ -28,16 +29,8 @@ export default async ({ app, log }) => {
   app.use(bodyParser());
   app.use(passport.initialize());
 
-  router.post("/signup", async (ctx, next) => {
-    log.debug("Signup endpoint");
-    const newAccount = ctx.request.body;
-    await accounts.signup(newAccount);
-    ctx.status = 201;
-    await next();
-  });
-  router.post("/signin", passport.authenticate("local", { session: false }), async (ctx) => {
-    ctx.response.body = "";
-  });
+  // addroutes from modules
+  accountRoutes({ router, log });
 
   app.use(router.routes());
 };
